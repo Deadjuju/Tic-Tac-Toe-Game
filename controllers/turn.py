@@ -14,6 +14,10 @@ class Turn:
     def choose_a_box(self):
         while True:
             box = self.grid.get_the_box()
+            is_free_box = self.grid.check_box_avaibility(box)
+            if not is_free_box:
+                self.turn_view.warning_box_already_used()
+                return self.choose_a_box()
             if self.turn_view.prompt_confirmation(box, self.grid):
                 return box
             return self.choose_a_box()

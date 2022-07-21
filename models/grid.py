@@ -1,5 +1,5 @@
 
-from models.player import Player
+from models.player import Player, Pointer
 
 
 class Grid:
@@ -88,6 +88,36 @@ class Grid:
             return ("b1", "b2", "b3")[index]
         if line['name'] == self.linec['name']:
             return ("c1", "c2", "c3")[index]
+
+    def check_box_avaibility(self, box: str) -> True:
+        if box == "a1":
+            if self.a1 == Pointer.CIRCLE.value or self.a1 == Pointer.CROSS.value:
+                return False
+        if box == "a2":
+            if self.a2 == Pointer.CIRCLE.value or self.a2 == Pointer.CROSS.value:
+                return False
+        if box == "a3":
+            if self.a3 == Pointer.CIRCLE.value or self.a3 == Pointer.CROSS.value:
+                return False
+        if box == "b1":
+            if self.b1 == Pointer.CIRCLE.value or self.b1 == Pointer.CROSS.value:
+                return False
+        if box == "b2":
+            if self.b2 == Pointer.CIRCLE.value or self.b2 == Pointer.CROSS.value:
+                return False
+        if box == "b3":
+            if self.b3 == Pointer.CIRCLE.value or self.b3 == Pointer.CROSS.value:
+                return False
+        if box == "c1":
+            if self.c1 == Pointer.CIRCLE.value or self.c1 == Pointer.CROSS.value:
+                return False
+        if box == "c2":
+            if self.c2 == Pointer.CIRCLE.value or self.c2 == Pointer.CROSS.value:
+                return False
+        if box == "c3":
+            if self.c3 == Pointer.CIRCLE.value or self.c3 == Pointer.CROSS.value:
+                return False
+        return True
 
     def update_template(self, box: str, pointer: str) -> None:
         if box == "a1":
