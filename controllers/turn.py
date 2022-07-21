@@ -1,6 +1,6 @@
 
-from grid import Grid
-from player import Player, Pointer
+from models.grid import Grid
+from models.player import Player, Pointer
 from views.turn_view import TurnView
 
 

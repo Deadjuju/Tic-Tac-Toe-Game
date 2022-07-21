@@ -1,5 +1,5 @@
 from time import sleep
-from player import Player
+from models.player import Player
 
 
 TICTACTOE = """
