@@ -8,6 +8,7 @@ class TurnView:
         print(f"{player.username} plays! ")
         print(f"Pointer: {player.pointer} ")
         print("-" * 20)
+        input("- press enter -")
 
     @classmethod
     def prompt_confirmation(cls, box, grid):
