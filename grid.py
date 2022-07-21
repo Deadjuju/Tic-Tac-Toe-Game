@@ -17,37 +17,24 @@ class Grid:
         self.c2 = " "
         self.c3 = " "
 
-    # @property
-    # def a1(self):
-    #     return self._a1
-	
-    # @a1.setter
-    # def a1(self, new_a1):
-    #     self._a1 = new_a1
-
-
     @property
-    def linea(self) -> str:
+    def linea(self) -> dict:
         line = {'name': "linea", 'value': f"{self.a1}|{self.a2}|{self.a3}"}
         return line
 
     @property
-    def lineb(self) -> str:
+    def lineb(self) -> dict:
         line = {'name': "lineb", 'value': f"{self.b1}|{self.b2}|{self.b3}"}
         return line
 
     @property
-    def linec(self) -> str:
+    def linec(self) -> dict:
         line = {'name': "linec", 'value': f"{self.c1}|{self.c2}|{self.c3}"}
         return line
 
     @property
-    def template(self):
+    def template(self) -> str:
         return f"{self.linea['value']}\n{self.lineb['value']}\n{self.linec['value']}"
-
-    def display_current_grid(self):
-        print("-_ CURRENT GRID _-\n")
-        print(f"{self.template}\n")
 
     @classmethod
     def not_valide_choice_message(cls, wrong_choice):
@@ -55,6 +42,10 @@ class Grid:
         print("############ WARNING ############")
         print(f"-- {wrong_choice} -- \nis not a valid choice")
         print(f"{'_' * 33}\n")
+
+    def display_current_grid(self) -> None:
+        print("-_ CURRENT GRID _-\n")
+        print(f"{self.template}\n")
 
     def _choose_a_line(self):
         print("Choose a line.")
@@ -72,7 +63,7 @@ class Grid:
         self.not_valide_choice_message(line)
         return self._choose_a_line()
 
-    def _choose_a_column(self, line):
+    def _choose_a_column(self, line: dict):
         print("Choose a column.")
         print(line['value'])
         print("^ ^ ^")
@@ -87,7 +78,7 @@ class Grid:
         self.not_valide_choice_message(column)
         return self._choose_a_column(line)
 
-    def get_the_box(self):
+    def get_the_box(self) -> str:
         line = self._choose_a_line()
         column = self._choose_a_column(line)
         index = column - 1
@@ -98,7 +89,7 @@ class Grid:
         if line['name'] == self.linec['name']:
             return ("c1", "c2", "c3")[index]
 
-    def update_template(self, box, pointer):
+    def update_template(self, box: str, pointer: str) -> None:
         if box == "a1":
             self.a1 = pointer
         if box == "a2":
@@ -118,19 +109,35 @@ class Grid:
         if box == "c3":
             self.c3 = pointer
 
+    def check_if_winner(self, pointer: str) -> bool:
+        a_line = self.a1 == self.a2 == self.a3 == pointer
+        b_line = self.b1 == self.b2 == self.b3 == pointer
+        c_line = self.c1 == self.c2 == self.c3 == pointer
+        column_1 = self.a1 == self.b1 == self.c1 == pointer
+        column_2 = self.a2 == self.b2 == self.c2 == pointer
+        column_3 = self.a3 == self.b3 == self.c3 == pointer
+        diagonal_1 = self.a1 == self.b2 == self.c3 == pointer
+        diagonal_2 = self.a3 == self.b2 == self.c1 == pointer
+
+        if a_line or b_line or c_line:
+            return True
+        if column_1 or column_2 or column_3:
+            return True
+        if diagonal_1 or diagonal_2:
+            return True
+        return False
+       
 
 if __name__ == "__main__":
 
     grid = Grid()
-    print(grid.template)
+
+    print("check")
+    grid.check_if_winner("!")
 
     pointer = "/"
     box = grid.get_the_box()
     print(f"Box: {box}")
-    # if box == "a1":
-    #     print("True")
-    #     grid.a1 = "!"
-    #     print(grid.a1)
     grid.update_template(box, "O")
 
     print(grid.template)
