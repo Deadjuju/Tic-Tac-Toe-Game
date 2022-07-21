@@ -22,6 +22,7 @@ class TurnView:
 
     @classmethod
     def warning_box_already_used(cls) -> None:
+        print()
         print("!" * 15)
         print("/!\ WARNING /!\\")
         sleep(1)

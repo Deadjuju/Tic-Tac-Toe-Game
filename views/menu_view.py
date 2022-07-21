@@ -44,6 +44,24 @@ class TicTacToeView:
         sleep(2)
 
     @classmethod
+    def prompt_for_username(cls, player_number, pointer) -> str:
+        print("_" * 15)
+        sleep(0.5)
+        print(f"Player {player_number}:")
+        print(f"You are --  {pointer}  -- ")
+        username = input("please type your username: -> ")
+        return username
+
+    @classmethod
+    def not_empty_username(cls) -> None:
+        print()
+        print("!" * 15)
+        print("/!\ WARNING /!\\")
+        sleep(1)
+        print("This field can not be empty.")
+        sleep(1)
+
+    @classmethod
     def prompt_to_stop_the_game(cls) -> bool:
         print("To stop the game type stop:")
         response = input("|-> ")

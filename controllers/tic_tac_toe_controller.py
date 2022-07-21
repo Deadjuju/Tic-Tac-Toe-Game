@@ -8,7 +8,7 @@ from views.menu_view import TicTacToeView
 
 class TicTacToe:
 
-    def __init__(self, grid, view, player_manager) -> None:
+    def __init__(self, grid: Grid, view: TicTacToeView, player_manager: Player) -> None:
         self.grid = grid
         self.view = view
         self.player_manager = player_manager
@@ -22,7 +22,7 @@ class TicTacToe:
         return starter
 
     def _check_if_username_is_free(self, username1, pointer2):
-        username2 = self.player_manager.info_choose_your_username(player_number=2, pointer_obj=pointer2)
+        username2 = self._info_choose_your_username(player_number=2, pointer_obj=pointer2)
         if username1 == username2:
             print("This username is not free")
             return self._check_if_username_is_free(username1, pointer2)
@@ -32,7 +32,15 @@ class TicTacToe:
     def _change_player(cls, current_player, player1, player2): 
         if current_player == player1:
             return player2
-        return player1        
+        return player1
+
+    def _info_choose_your_username(self, player_number: int, pointer_obj: Pointer):
+        pointer = pointer_obj.value
+        username = self.view.prompt_for_username(player_number, pointer)
+        if username == "":
+            self.view.not_empty_username()
+            return self._info_choose_your_username(player_number, pointer_obj)
+        return username        
 
     def run(self):
         # Welcome part
@@ -47,7 +55,7 @@ class TicTacToe:
 
         # choose player 1
         pointer1 = Pointer.CIRCLE
-        username1 = self.player_manager.info_choose_your_username(player_number=1, pointer_obj=pointer1)
+        username1 = self._info_choose_your_username(player_number=1, pointer_obj=pointer1)
         player1 = Player(username1, pointer1)
 
         # choose player 2
