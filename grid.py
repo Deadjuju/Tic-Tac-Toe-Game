@@ -1,8 +1,11 @@
 
+from player import Player
+
+
 class Grid:
 
     def __init__(self) -> None:
-        # self.a1 = "_"
+        self.a1 = "_"
         self.a2 = "_"
         self.a3 = "_"
 
@@ -14,25 +17,37 @@ class Grid:
         self.c2 = " "
         self.c3 = " "
 
-    @property
-    def a1(self, pointer='_') -> str:
-        return pointer
+    # @property
+    # def a1(self):
+    #     return self._a1
+	
+    # @a1.setter
+    # def a1(self, new_a1):
+    #     self._a1 = new_a1
+
 
     @property
     def linea(self) -> str:
-        return f"{self.a1}|{self.a2}|{self.a3}"
+        line = {'name': "linea", 'value': f"{self.a1}|{self.a2}|{self.a3}"}
+        return line
 
     @property
     def lineb(self) -> str:
-        return f"{self.b1}|{self.b2}|{self.b3}"
+        line = {'name': "lineb", 'value': f"{self.b1}|{self.b2}|{self.b3}"}
+        return line
 
     @property
     def linec(self) -> str:
-        return f"{self.c1}|{self.c2}|{self.c3}"
+        line = {'name': "linec", 'value': f"{self.c1}|{self.c2}|{self.c3}"}
+        return line
 
     @property
     def template(self):
-        return f"{self.linea}\n{self.lineb}\n{self.linec}"
+        return f"{self.linea['value']}\n{self.lineb['value']}\n{self.linec['value']}"
+
+    def display_current_grid(self):
+        print("-_ CURRENT GRID _-\n")
+        print(f"{self.template}\n")
 
     @classmethod
     def not_valide_choice_message(cls, wrong_choice):
@@ -43,10 +58,11 @@ class Grid:
 
     def _choose_a_line(self):
         print("Choose a line.")
-        print(f"1 -> {self.linea}")
-        print(f"2 -> {self.lineb}")
-        print(f"3 -> {self.linec}")
+        print(f"1 -> {self.linea['value']}")
+        print(f"2 -> {self.lineb['value']}")
+        print(f"3 -> {self.linec['value']}")
         line = input("Type: 1, 2, or 3: ")
+        print(f"Line: {line}")
         if line == "1":
             return self.linea
         if line == "2":
@@ -58,7 +74,7 @@ class Grid:
 
     def _choose_a_column(self, line):
         print("Choose a column.")
-        print(line)
+        print(line['value'])
         print("^ ^ ^")
         print("1 2 3")
         column = input("Type: 1, 2, or 3: ")
@@ -75,37 +91,32 @@ class Grid:
         line = self._choose_a_line()
         column = self._choose_a_column(line)
         index = column - 1
-        if line == self.linea:
+        if line['name'] == self.linea['name']:
             return ("a1", "a2", "a3")[index]
-        if line == self.lineb:
+        if line['name'] == self.lineb['name']:
             return ("b1", "b2", "b3")[index]
-        if line == self.linec:
+        if line['name'] == self.linec['name']:
             return ("c1", "c2", "c3")[index]
 
-    
-    # @property
-    # def replace_box(self, pointer):
-    #     box = self._get_the_box()
-    #     if box == "a1":
-    #         self.a1 == pointer
-    #     if box == "a2":
-    #         self.a2 == pointer
-    #     if box == "a3":
-    #         self.a3 == pointer
-    #     if box == "b1":
-    #         self.b1 == pointer
-    #     if box == "b2":
-    #         self.b2 == pointer
-    #     if box == "b3":
-    #         self.b3 == pointer
-    #     if box == "c1":
-    #         self.c1 == pointer
-    #     if box == "c2":
-    #         self.c2 == pointer
-    #     if box == "c3":
-    #         self.c3 == pointer
-
-
+    def update_template(self, box, pointer):
+        if box == "a1":
+            self.a1 = pointer
+        if box == "a2":
+            self.a2 = pointer
+        if box == "a3":
+            self.a3 = pointer
+        if box == "b1":
+            self.b1 = pointer
+        if box == "b2":
+            self.b2 = pointer
+        if box == "b3":
+            self.b3 = pointer
+        if box == "c1":
+            self.c1 = pointer
+        if box == "c2":
+            self.c2 = pointer
+        if box == "c3":
+            self.c3 = pointer
 
 
 if __name__ == "__main__":
@@ -114,6 +125,13 @@ if __name__ == "__main__":
     print(grid.template)
 
     pointer = "/"
-    grid.get_the_box()
-    
+    box = grid.get_the_box()
+    print(f"Box: {box}")
+    # if box == "a1":
+    #     print("True")
+    #     grid.a1 = "!"
+    #     print(grid.a1)
+    grid.update_template(box, "O")
+
     print(grid.template)
+    print(grid.a1)
