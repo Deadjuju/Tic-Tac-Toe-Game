@@ -119,7 +119,7 @@ class TicTacToe:
                 turn = Turn(grid, current_player)
                 turn.run()
                 grid = turn.grid
-                grid.display_current_grid()
+                grid.display_current_grid
                 
                 is_player_winner = grid.check_if_winner(current_player.pointer)
 

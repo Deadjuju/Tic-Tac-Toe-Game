@@ -1,5 +1,5 @@
 
-from models.player import Player, Pointer
+from models.player import Pointer
 
 
 class Grid:
@@ -36,58 +36,9 @@ class Grid:
     def template(self) -> str:
         return f"{self.linea['value']}\n{self.lineb['value']}\n{self.linec['value']}"
 
-    @classmethod
-    def not_valide_choice_message(cls, wrong_choice):
-        print(f"\n{'_' * 33}")
-        print("############ WARNING ############")
-        print(f"-- {wrong_choice} -- \nis not a valid choice")
-        print(f"{'_' * 33}\n")
-
+    @property
     def display_current_grid(self) -> None:
-        print("-_ CURRENT GRID _-\n")
-        print(f"{self.template}\n")
-
-    def _choose_a_line(self):
-        print("Choose a line.")
-        print(f"1 -> {self.linea['value']}")
-        print(f"2 -> {self.lineb['value']}")
-        print(f"3 -> {self.linec['value']}")
-        line = input("Type: 1, 2, or 3: ")
-        print(f"Line: {line}")
-        if line == "1":
-            return self.linea
-        if line == "2":
-            return self.lineb
-        if line == "3":
-            return self.linec
-        self.not_valide_choice_message(line)
-        return self._choose_a_line()
-
-    def _choose_a_column(self, line: dict):
-        print("Choose a column.")
-        print(line['value'])
-        print("^ ^ ^")
-        print("1 2 3")
-        column = input("Type: 1, 2, or 3: ")
-        if column == "1":
-            return 1
-        if column == "2":
-            return 2
-        if column == "3":
-            return 3
-        self.not_valide_choice_message(column)
-        return self._choose_a_column(line)
-
-    def get_the_box(self) -> str:
-        line = self._choose_a_line()
-        column = self._choose_a_column(line)
-        index = column - 1
-        if line['name'] == self.linea['name']:
-            return ("a1", "a2", "a3")[index]
-        if line['name'] == self.lineb['name']:
-            return ("b1", "b2", "b3")[index]
-        if line['name'] == self.linec['name']:
-            return ("c1", "c2", "c3")[index]
+        print(f"-_ CURRENT GRID _-\n{self.template}\n")
 
     def check_box_avaibility(self, box: str) -> True:
         if box == "a1":
