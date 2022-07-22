@@ -15,6 +15,12 @@ class Turn:
         self.turn_view = TurnView()
 
     def _choose_a_line(self) -> dict:
+        """ choice and control of the line
+
+        Returns:
+            dict: choosen line
+        """
+
         game_grid = self.grid
         line = self.turn_view.prompt_to_choose_a_line(game_grid)
         if line == "1":
@@ -27,6 +33,15 @@ class Turn:
         return self._choose_a_line()
 
     def _choose_a_column(self, line: dict) -> int:
+        """ choice and control of the
+
+        Args:
+            line (dict):
+
+        Returns:
+            int: choosen column
+        """
+
         column = self.turn_view.prompt_to_choose_a_column(line)
         if column == "1":
             return 1
@@ -38,6 +53,12 @@ class Turn:
         return self._choose_a_column(line)
 
     def _get_the_box(self) -> str:
+        """ find the choosen box with a line and a column
+
+        Returns:
+            str: choosen box
+        """
+
         line = self._choose_a_line()
         column = self._choose_a_column(line)
         index = column - 1
@@ -78,9 +99,4 @@ class Turn:
 
 if __name__ == "__main__":
 
-    grid = Grid()
-    player = Player("Deadjuju", Pointer.CIRCLE)
-
-    turn = Turn(grid, player)
-
-    turn.run()
+    pass

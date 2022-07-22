@@ -20,8 +20,3 @@ class Player:
 
     def __str__(self) -> str:
         return f"{self.username} | {self.score} points"
-
-
-if __name__ == "__main__":
-
-    pass

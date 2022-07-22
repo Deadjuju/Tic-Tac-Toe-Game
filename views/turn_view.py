@@ -58,4 +58,3 @@ class TurnView:
         sleep(1)
         print("This box is already selected")
         sleep(1)
-    

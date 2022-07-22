@@ -108,18 +108,3 @@ class Grid:
             return True
         return False
        
-
-if __name__ == "__main__":
-
-    grid = Grid()
-
-    print("check")
-    grid.check_if_winner("!")
-
-    pointer = "/"
-    box = grid.get_the_box()
-    print(f"Box: {box}")
-    grid.update_template(box, "O")
-
-    print(grid.template)
-    print(grid.a1)
